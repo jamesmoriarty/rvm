@@ -26,11 +26,9 @@ bash "chgrp -R rvm /usr/local/rvm/" do
   code "chgrp -R rvm /usr/local/rvm/"
 end
 
-%w{chef bundler pry whenever}.each do |gem|
-  rvm_gem gem do
-    action :install
-    options '--no-ri --no-rdoc'
-  end
+rvm_gem 'bundler' do
+  action :install
+  options '--no-ri --no-rdoc'
 end
 
 rvm_gem 'rake' do
@@ -38,7 +36,7 @@ rvm_gem 'rake' do
   options '--no-ri --no-rdoc --version 10.0.2'
 end
 
-%w{bundle rake whenever}.each do |bin|
+%w{bundle rake}.each do |bin|
   rvm_wrapper('rvm') { binary bin }
 end
 
